@@ -26,7 +26,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
-    "start": "node dist/bin/react-intel.js"
+    "start": "node dist/bin/react-intel.js",
+    "prepublishOnly": "npm run typecheck && npm test && npm run build"
   },
   "keywords": [
     "react",
@@ -38,6 +39,14 @@
   ],
   "author": "MD",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matieydjato/react-intel.git"
+  },
+  "bugs": {
+    "url": "https://github.com/matieydjato/react-intel/issues"
+  },
+  "homepage": "https://github.com/matieydjato/react-intel#readme",
   "engines": {
     "node": ">=18"
   },

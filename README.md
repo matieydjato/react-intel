@@ -7,16 +7,29 @@
 ## Quickstart
 
 ```bash
+npx react-intel src/components/Button.tsx
+```
+
+Writes `Button.test.tsx` and `Button.stories.tsx` next to the source file.
+
+### Flags
+
+| Flag | Description |
+|---|---|
+| `-y`, `--yes` | Skip overwrite prompts |
+| `--ai` | Enrich inferred values + edge cases via an `AiProvider` (mock provider bundled) |
+
+The CLI prints a verification checklist after writing — review inferred prop values, assertion meaningfulness, and event-handler coverage before committing.
+
+## Local development
+
+```bash
 npm install
 npm run build
 node dist/bin/react-intel.js tests/fixtures/Button.tsx
 ```
 
-This will write `Button.test.tsx` and `Button.stories.tsx` next to the source file.
-
-Use `-y` to skip overwrite prompts, `--ai` to enable AI enhancement (not implemented yet).
-
-## Scripts
+### Scripts
 
 | Command | Description |
 |---|---|
@@ -37,7 +50,7 @@ src/
     pipeline.ts  Orchestrator (also the programmatic API)
     model.ts     Shared data contract
     errors.ts    Typed errors
-  ai/            (Phase 4) optional AI enhancer
+  ai/            Pluggable AI enhancer (provider interface + mock)
   utils/         Logger, file helpers
 bin/
   react-intel.ts CLI shebang entry (built to dist/bin/react-intel.js)
@@ -47,8 +60,27 @@ tests/           Vitest suites + .tsx fixtures
 ## Programmatic use
 
 ```ts
-import { run } from "react-intel";
+import { run, buildEnhancer, MockProvider } from "react-intel";
 
-const { model, outputs } = await run("./Button.tsx");
+const { model, outputs } = await run("./Button.tsx", {
+  enhancer: buildEnhancer(new MockProvider()),
+});
+
 console.log(outputs.testSource);
+console.log(outputs.storySource);
 ```
+
+## AI enhancement
+
+`--ai` is opt-in and pluggable. The bundled `MockProvider` produces realistic strings deterministically (no network calls, no API key). Real providers (Anthropic, Ollama) are planned — see [BACKLOG.md](./BACKLOG.md).
+
+The enhancer:
+- Times out at 10s and falls back to non-AI output (warning, never throws)
+- Validates suggestions against AST-extracted props (drops references to unknown props)
+- Is purely additive — never overwrites statically inferred values
+
+## Status & roadmap
+
+- v1.0 — see [CHANGELOG.md](./CHANGELOG.md)
+- v1.1+ — see [BACKLOG.md](./BACKLOG.md)
+
