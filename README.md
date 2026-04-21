@@ -2,7 +2,7 @@
 
 > Generate Jest + RTL tests and Storybook CSF 3 stories from your React components.
 
-**Status:** v1.0.0 — MVP complete (all 5 phases of the [PRD](./react-intel-cli-PRD.md)).
+**Status:** v1.0.0 — MVP complete (all 5 phases of the [PRD](./PRD.md)).
 
 ## Quickstart
 
