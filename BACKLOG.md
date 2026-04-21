@@ -59,7 +59,6 @@ Architecture is already in place: `AiProvider` interface in [src/ai/types.ts](sr
 
 - [ ] Cross-file type resolution (currently `extends Foo` only resolves same-file types — see [src/core/analyzer/props.ts](src/core/analyzer/props.ts))
 - [ ] Generic component support (e.g. `function List<T>(props: Props<T>)`)
-- [ ] HOC / `forwardRef` / `memo` unwrapping in component detection ([src/core/analyzer/component.ts](src/core/analyzer/component.ts))
 - [ ] Discriminated union props → generate one test per variant
 - [ ] `--dry-run` flag (print what would be written, write nothing)
 - [ ] Telemetry opt-in for anonymized usage stats (only if there's demand)

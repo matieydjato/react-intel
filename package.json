@@ -1,6 +1,6 @@
 {
   "name": "react-intel",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "React Component Intelligence CLI — auto-generate tests and Storybook stories from your components.",
   "type": "module",
   "bin": {

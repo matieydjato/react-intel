@@ -51,7 +51,7 @@ export function findComponent(parsed: ParsedSource): ComponentInfo {
     ExportDefaultDeclaration(path) {
       const decl = path.node.declaration;
       // `export default function Foo() {}` / `export default () => ...`
-      const direct = nodeToComponent(decl, inferNameFromFile(parsed.filePath), true);
+      const direct = nodeToComponent(decl, inferNameFromFile(parsed.filePath), true, undefined, declarations);
       if (direct) {
         defaultCandidate = direct;
         return;
@@ -60,9 +60,14 @@ export function findComponent(parsed: ParsedSource): ComponentInfo {
       if (t.isIdentifier(decl)) {
         const found = declarations.get(decl.name);
         if (found) {
-          const info = nodeToComponent(found.node, decl.name, true, found.typeId);
+          const info = nodeToComponent(found.node, decl.name, true, found.typeId, declarations);
           if (info) defaultCandidate = info;
         }
+      }
+      // `export default memo(Foo)` / `export default forwardRef(...)`
+      if (t.isCallExpression(decl)) {
+        const info = nodeToComponent(decl, inferNameFromFile(parsed.filePath), true, undefined, declarations);
+        if (info) defaultCandidate = info;
       }
     },
     ExportNamedDeclaration(path) {
@@ -70,7 +75,7 @@ export function findComponent(parsed: ParsedSource): ComponentInfo {
       if (!decl) return;
 
       if (t.isFunctionDeclaration(decl) && decl.id) {
-        const info = nodeToComponent(decl, decl.id.name, false);
+        const info = nodeToComponent(decl, decl.id.name, false, undefined, declarations);
         if (info && !namedCandidate) namedCandidate = info;
         return;
       }
@@ -78,7 +83,7 @@ export function findComponent(parsed: ParsedSource): ComponentInfo {
       if (t.isVariableDeclaration(decl)) {
         for (const declarator of decl.declarations) {
           if (!t.isIdentifier(declarator.id) || !declarator.init) continue;
-          const info = nodeToComponent(declarator.init, declarator.id.name, false, declarator.id);
+          const info = nodeToComponent(declarator.init, declarator.id.name, false, declarator.id, declarations);
           if (info && !namedCandidate) namedCandidate = info;
         }
       }
@@ -101,7 +106,8 @@ function inferNameFromFile(filePath: string): string {
 
 /**
  * Convert an export declaration node into a ComponentInfo if it looks like a
- * React component (function or arrow function).
+ * React component (function or arrow function, possibly wrapped in
+ * `memo(...)` / `forwardRef(...)` / `React.memo(...)` / `React.forwardRef(...)`).
  *
  * `typedId` is the variable identifier when the declaration is a variable, used
  * to pull the props type from `const X: React.FC<Props>` style annotations.
@@ -111,6 +117,7 @@ function nodeToComponent(
   fallbackName: string,
   isDefaultExport: boolean,
   typedId?: t.Identifier,
+  declarations?: Map<string, { node: t.Function; typeId?: t.Identifier }>,
 ): ComponentInfo | undefined {
   // Direct function declaration: `export default function Button(...) {}`
   if (t.isFunctionDeclaration(node) || t.isFunctionExpression(node)) {
@@ -135,7 +142,82 @@ function nodeToComponent(
     };
   }
 
-  // `export default Button` (identifier reference) — unsupported for MVP.
+  // `forwardRef(...)`, `memo(...)`, `React.forwardRef(...)`, `React.memo(...)`,
+  // possibly nested (e.g. `memo(forwardRef(...))`).
+  if (t.isCallExpression(node)) {
+    const unwrapped = unwrapHocCall(node, declarations ?? new Map());
+    if (unwrapped) {
+      return {
+        name: typedId?.name ?? fallbackName,
+        isDefaultExport,
+        propsTypeName: unwrapped.propsTypeName,
+        implementation: unwrapped.fn,
+      };
+    }
+  }
+
+  return undefined;
+}
+
+/**
+ * Recursively unwrap `memo(...)` / `forwardRef(...)` calls (with or without
+ * the `React.` prefix) and return the underlying function plus the props type
+ * name when discoverable.
+ *
+ * Type parameter conventions matched here:
+ *   - `forwardRef<RefType, PropsType>(...)` → second type param is props
+ *   - `memo<PropsType>(...)`                → first type param is props
+ *
+ * Falls back to the function's first parameter annotation when no explicit
+ * type argument is provided.
+ */
+function unwrapHocCall(
+  call: t.CallExpression,
+  declarations: Map<string, { node: t.Function; typeId?: t.Identifier }>,
+): { fn: t.Function; propsTypeName?: string } | undefined {
+  const wrapper = getWrapperName(call.callee);
+  if (wrapper !== "memo" && wrapper !== "forwardRef") return undefined;
+
+  const arg = call.arguments[0];
+  if (!arg) return undefined;
+
+  let fn: t.Function | undefined;
+  let propsTypeName: string | undefined;
+
+  if (t.isArrowFunctionExpression(arg) || t.isFunctionExpression(arg)) {
+    fn = arg;
+  } else if (t.isIdentifier(arg)) {
+    fn = declarations.get(arg.name)?.node;
+  } else if (t.isCallExpression(arg)) {
+    const inner = unwrapHocCall(arg, declarations);
+    if (inner) {
+      fn = inner.fn;
+      propsTypeName = inner.propsTypeName;
+    }
+  }
+
+  if (!fn) return undefined;
+
+  // Pull props type from explicit type arguments on this call.
+  if (!propsTypeName && call.typeParameters) {
+    const idx = wrapper === "forwardRef" ? 1 : 0;
+    const tparam = call.typeParameters.params[idx];
+    if (tparam) propsTypeName = tsTypeToName(tparam);
+  }
+
+  // Fall back to the function's own param annotation.
+  if (!propsTypeName) {
+    propsTypeName = extractPropsTypeFromParam(fn.params[0]);
+  }
+
+  return { fn, propsTypeName };
+}
+
+function getWrapperName(callee: t.Expression | t.V8IntrinsicIdentifier): string | undefined {
+  if (t.isIdentifier(callee)) return callee.name;
+  if (t.isMemberExpression(callee) && !callee.computed && t.isIdentifier(callee.property)) {
+    return callee.property.name;
+  }
   return undefined;
 }
 

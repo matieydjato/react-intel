@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 See [BACKLOG.md](BACKLOG.md) for planned work.
 
+## [1.0.1] — 2026-04-21
+
+### Fixed
+- Components wrapped in `React.forwardRef(...)` / `forwardRef(...)` are now detected, with props type read from the second type argument (`forwardRef<RefType, PropsType>`).
+- Components wrapped in `React.memo(...)` / `memo(...)` are now detected, including the common pattern of `memo(SeparatelyDeclaredFn)` where the implementation lives in another declaration.
+- Nested wrappers (e.g. `memo(forwardRef(...))`) are unwrapped recursively.
+
 ## [1.0.0] — 2026-04-21
 
 Initial MVP release.
@@ -34,5 +41,6 @@ Initial MVP release.
 - Cross-file type resolution is not yet supported; `extends` / `&` referencing external types emit a warning and are skipped.
 - Generic components, HOC-wrapped components, and `forwardRef` / `memo` unwrapping are out of scope for v1.0.
 
-[Unreleased]: https://github.com/matieydjato/react-intel/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/matieydjato/react-intel/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/matieydjato/react-intel/releases/tag/v1.0.1
 [1.0.0]: https://github.com/matieydjato/react-intel/releases/tag/v1.0.0
