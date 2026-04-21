@@ -34,5 +34,5 @@ Initial MVP release.
 - Cross-file type resolution is not yet supported; `extends` / `&` referencing external types emit a warning and are skipped.
 - Generic components, HOC-wrapped components, and `forwardRef` / `memo` unwrapping are out of scope for v1.0.
 
-[Unreleased]: https://github.com/mdjato/react-intel/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/mdjato/react-intel/releases/tag/v1.0.0
+[Unreleased]: https://github.com/matieydjato/react-intel/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/matieydjato/react-intel/releases/tag/v1.0.0
