@@ -20,19 +20,19 @@ Architecture is already in place: `AiProvider` interface in [src/ai/types.ts](sr
   - Handle connection-refused gracefully → warning, skip enhancement
 - [ ] **Provider selection**
   - `--provider <mock|anthropic|ollama>` flag (default `mock`)
-  - Or read from `react-intel.config.js`
+  - Or read from `react-spec-gen.config.js`
 - [ ] **Tests**
   - Mock the SDK / fetch; verify prompt shape, JSON parse failure handling, timeout path
 - [ ] **Docs**: README section "AI providers" with setup + privacy notes
 
 ### Config file
-- [ ] Load `react-intel.config.{js,mjs,ts}` via cosmiconfig (or hand-rolled — keep deps lean)
+- [ ] Load `react-spec-gen.config.{js,mjs,ts}` via cosmiconfig (or hand-rolled — keep deps lean)
 - [ ] Schema: `outputDir`, `testFileNaming` (`{name}.test.tsx` vs `{name}.spec.tsx`), `storyFileNaming`, `provider`, `model`, `timeoutMs`
 - [ ] CLI flags override config
 - [ ] Warn (not error) on unknown keys
 
 ### Batch mode
-- [ ] `npx react-intel src/components/` walks dir for `*.tsx` (skip `.test.`, `.stories.`, `.d.ts`)
+- [ ] `npx react-spec-gen src/components/` walks dir for `*.tsx` (skip `.test.`, `.stories.`, `.d.ts`)
 - [ ] Sequential by default; `--concurrency N` for parallel
 - [ ] Per-file success/skip/fail summary at end
 - [ ] Single-file path still works (current behavior)
@@ -46,11 +46,11 @@ Architecture is already in place: `AiProvider` interface in [src/ai/types.ts](sr
 
 ## v2.0 — Platform Expansion
 
-- [ ] VS Code extension (right-click → "Generate tests with react-intel")
+- [ ] VS Code extension (right-click → "Generate tests with react-spec-gen")
 - [ ] Accessibility (a11y) suggestions in checklist (axe-core static rules on the JSX root)
 - [ ] Re-render / performance hints (detect inline objects/arrays in default props)
-- [ ] CI/CD integration: GitHub Action template that runs `react-intel --check` (fails if generated files are stale)
-- [ ] Vitest output target (alongside Jest) — `--framework vitest`
+- [ ] CI/CD integration: GitHub Action template that runs `react-spec-gen --check` (fails if generated files are stale)
+- [ ] Jest output target (alongside Vitest) — `--framework jest`
 - [ ] Cypress component-test output target
 
 ---
@@ -67,8 +67,8 @@ Architecture is already in place: `AiProvider` interface in [src/ai/types.ts](sr
 
 ## Release prep (when ready to publish v1.0)
 
-- [ ] Verify `react-intel` name availability on npm (`npm view react-intel`); fall back to `@<scope>/react-intel`
-- [ ] Add `LICENSE` (MIT?)
-- [ ] Add `CHANGELOG.md`
-- [ ] Tag `v1.0.0` and push
-- [ ] `npm publish --access public`
+- [x] Verify `react-intel` name availability on npm (`npm view react-intel`); fall back to `@<scope>/react-intel` — *renamed to `react-spec-gen` in 1.0.5 due to similarity with `react-intl`*
+- [x] Add `LICENSE` (MIT?)
+- [x] Add `CHANGELOG.md`
+- [x] Tag `v1.0.0` and push
+- [x] `npm publish --access public`

@@ -2,7 +2,7 @@ import type { ComponentModel, EdgeCase, InferredValue, PropDescriptor } from "..
 import { HEADER_COMMENT } from "./templates/header.js";
 
 /**
- * Generate a Jest + React Testing Library test file for the component.
+ * Generate a Vitest + React Testing Library test file for the component.
  * Output is deterministic (NFR-07).
  */
 export function generateTest(model: ComponentModel): string {

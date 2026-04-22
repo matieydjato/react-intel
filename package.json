@@ -1,7 +1,7 @@
 {
   "name": "react-spec-gen",
   "version": "1.0.6",
-  "description": "Auto-generate Jest + React Testing Library tests and Storybook CSF 3 stories from your React components.",
+  "description": "Auto-generate Vitest + React Testing Library tests and Storybook CSF 3 stories from your React components.",
   "type": "module",
   "bin": {
     "react-spec-gen": "dist/bin/react-intel.js"
