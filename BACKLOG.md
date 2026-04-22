@@ -1,3 +1,25 @@
+# Roadmap
+
+Detailed work is tracked in [GitHub Issues](https://github.com/matieydjato/react-intel/issues) and grouped by [milestones](https://github.com/matieydjato/react-intel/milestones). This file is a high-level summary.
+
+## [0.2 — Team & DX](https://github.com/matieydjato/react-intel/milestone/1)
+
+- Real AI providers (Anthropic, Ollama) + `--provider` flag
+- Config file (`react-spec-gen.config.{js,mjs,ts}`)
+- Batch mode (directory input)
+- Watch mode (`--watch`)
+
+## [1.0 — Platform Expansion](https://github.com/matieydjato/react-intel/milestone/2)
+
+- VS Code extension
+- Accessibility (a11y) suggestions
+- GitHub Action template + `--check` flag
+- Jest output target (alongside Vitest)
+- Cypress component-test target
+
+## Tech debt / nice-to-haves
+
+Cross-file type resolution, generic components, discriminated-union props, `--dry-run`, telemetry. See [Issues](https://github.com/matieydjato/react-intel/issues?q=is%3Aissue+no%3Amilestone) without a milestone.
 # Backlog
 
 Tracking work beyond the 0.1 initial release. Items grouped by release; ordered roughly by priority within each group.
