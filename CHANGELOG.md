@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 See [BACKLOG.md](BACKLOG.md) for planned work.
 
+## [1.0.4] — 2026-04-22
+
+### Fixed
+- `as const` is now applied per literal-union value (e.g. `bgType: "image" as const`) instead of wrapping the entire `baseProps` object. Wrapping the whole object marked array/object props as `readonly`, which broke generated tests for components with mutable props like `items: T[]`. The narrow type for literal-union strings is preserved without that side effect.
+
 ## [1.0.3] — 2026-04-22
 
 ### Fixed
@@ -51,7 +56,8 @@ Initial MVP release.
 - Cross-file type resolution is not yet supported; `extends` / `&` referencing external types emit a warning and are skipped.
 - Generic components, HOC-wrapped components, and `forwardRef` / `memo` unwrapping are out of scope for v1.0.
 
-[Unreleased]: https://github.com/matieydjato/react-intel/compare/v1.0.3...HEAD
+[Unreleased]: https://github.com/matieydjato/react-intel/compare/v1.0.4...HEAD
+[1.0.4]: https://github.com/matieydjato/react-intel/releases/tag/v1.0.4
 [1.0.3]: https://github.com/matieydjato/react-intel/releases/tag/v1.0.3
 [1.0.2]: https://github.com/matieydjato/react-intel/releases/tag/v1.0.2
 [1.0.1]: https://github.com/matieydjato/react-intel/releases/tag/v1.0.1

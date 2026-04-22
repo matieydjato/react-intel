@@ -45,15 +45,20 @@ describe("intelligence — undefined edge cases", () => {
 });
 
 describe("generator — type-safe object literals", () => {
-  it("appends `as const` to baseProps so string-literal unions remain narrow", async () => {
+  it("appends `as const` per literal-union value (not on the whole object)", async () => {
     const { outputs } = await run(fixture("Hero.tsx"));
-    // Without `as const`, `bgType: "image"` would widen to string and break
-    // assignment to the `"image" | "video"` union prop.
-    expect(outputs.testSource).toMatch(/const baseProps = \{[\s\S]*?\} as const;/);
+    // The fix: narrow only the literal-union prop value (e.g. `bgType: "image" as const`),
+    // not the entire baseProps object. Wrapping the whole object in `as const` would make
+    // array/object props readonly and break props typed as mutable `T[]` or `{...}`.
+    expect(outputs.testSource).toMatch(/bgType:\s*"image"\s+as const/);
+    expect(outputs.testSource).not.toMatch(/const baseProps = \{[\s\S]*?\} as const;/);
+    expect(outputs.testSource).not.toMatch(/\}\s+as const;\s*\n\s*render/);
   });
 
-  it("appends `as const` to per-edge-case props as well", async () => {
+  it("does not narrow non-literal-union string props", async () => {
     const { outputs } = await run(fixture("Hero.tsx"));
-    expect(outputs.testSource).toMatch(/\.\.\.baseProps,[\s\S]*?\} as const;/);
+    // Plain string props (e.g. `bg: "Bg"`) must NOT get `as const`.
+    expect(outputs.testSource).toMatch(/bg:\s*"[^"]*",/);
+    expect(outputs.testSource).not.toMatch(/bg:\s*"[^"]*"\s+as const/);
   });
 });
