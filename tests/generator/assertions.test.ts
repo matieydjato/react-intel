@@ -43,3 +43,17 @@ describe("intelligence — undefined edge cases", () => {
     expect(ids).not.toContain("onChange-undefined");
   });
 });
+
+describe("generator — type-safe object literals", () => {
+  it("appends `as const` to baseProps so string-literal unions remain narrow", async () => {
+    const { outputs } = await run(fixture("Hero.tsx"));
+    // Without `as const`, `bgType: "image"` would widen to string and break
+    // assignment to the `"image" | "video"` union prop.
+    expect(outputs.testSource).toMatch(/const baseProps = \{[\s\S]*?\} as const;/);
+  });
+
+  it("appends `as const` to per-edge-case props as well", async () => {
+    const { outputs } = await run(fixture("Hero.tsx"));
+    expect(outputs.testSource).toMatch(/\.\.\.baseProps,[\s\S]*?\} as const;/);
+  });
+});

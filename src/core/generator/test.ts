@@ -26,7 +26,7 @@ import { render, screen } from "@testing-library/react";
 ${importLine}
 
 describe("${model.name}", () => {
-${hasProps ? `  const baseProps = ${baseProps};\n\n` : ""}  it("renders with default props", () => {
+${hasProps ? `  const baseProps = ${baseProps} as const;\n\n` : ""}  it("renders with default props", () => {
     ${baseRender}
     ${rootAssertion}
   });
@@ -55,10 +55,10 @@ function renderEdgeCaseTest(componentName: string, edge: EdgeCase, hasProps: boo
     ? `{
       ...baseProps,
 ${overrides}
-    }`
+    } as const`
     : `{
 ${overrides}
-    }`;
+    } as const`;
 
   return `  it("${edge.description}", () => {
     const props = ${propsExpr};

@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 See [BACKLOG.md](BACKLOG.md) for planned work.
 
+## [1.0.2] — 2026-04-22
+
+### Fixed
+- Generated tests now append `as const` to `baseProps` and per-edge-case `props` literals so string-literal union members keep their narrow types. Without this, props like `bgType?: "image" | "video"` would widen to `string` in the object literal and fail to type-check when spread into the component.
+
 ## [1.0.1] — 2026-04-21
 
 ### Fixed
@@ -41,6 +46,7 @@ Initial MVP release.
 - Cross-file type resolution is not yet supported; `extends` / `&` referencing external types emit a warning and are skipped.
 - Generic components, HOC-wrapped components, and `forwardRef` / `memo` unwrapping are out of scope for v1.0.
 
-[Unreleased]: https://github.com/matieydjato/react-intel/compare/v1.0.1...HEAD
+[Unreleased]: https://github.com/matieydjato/react-intel/compare/v1.0.2...HEAD
+[1.0.2]: https://github.com/matieydjato/react-intel/releases/tag/v1.0.2
 [1.0.1]: https://github.com/matieydjato/react-intel/releases/tag/v1.0.1
 [1.0.0]: https://github.com/matieydjato/react-intel/releases/tag/v1.0.0
