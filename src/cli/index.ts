@@ -1,5 +1,6 @@
 import { Command } from "commander";
 import { runGenerate } from "./commands/generate.js";
+import pkg from "../../package.json" with { type: "json" };
 
 export function buildProgram(): Command {
   const program = new Command();
@@ -7,7 +8,7 @@ export function buildProgram(): Command {
   program
     .name("react-spec-gen")
     .description("Generate tests and Storybook stories from React components.")
-    .version("0.1.0")
+    .version(pkg.version)
     .argument("<file>", "Path to a .tsx or .jsx component file")
     .option("--ai", "Enable AI-powered enhancement (mock provider for now)", false)
     .option("-y, --yes", "Overwrite existing files without prompting", false)

@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 See [BACKLOG.md](BACKLOG.md) for planned work.
 
+## [0.1.2] — 2026-04-22
+
+### Fixed
+- CLI `--version` now reads from `package.json` at build time, so it can no longer drift from the published version (was hardcoded).
+
 ## [0.1.1] — 2026-04-22
 
 ### Fixed
@@ -43,6 +48,7 @@ Initial public release.
 - Files with multiple exported components pick the default export, falling back to the first.
 - Generated tests target Vitest. Jest support is on the roadmap.
 
-[Unreleased]: https://github.com/matieydjato/react-intel/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/matieydjato/react-intel/compare/v0.1.2...HEAD
+[0.1.2]: https://github.com/matieydjato/react-intel/releases/tag/v0.1.2
 [0.1.1]: https://github.com/matieydjato/react-intel/releases/tag/v0.1.1
 [0.1.0]: https://github.com/matieydjato/react-intel/releases/tag/v0.1.0

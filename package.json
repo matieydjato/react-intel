@@ -1,6 +1,6 @@
 {
   "name": "react-spec-gen",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Auto-generate Vitest + React Testing Library tests and Storybook CSF 3 stories from your React components.",
   "type": "module",
   "bin": {
