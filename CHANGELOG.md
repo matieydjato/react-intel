@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 See [BACKLOG.md](BACKLOG.md) for planned work.
 
+## [1.0.6] — 2026-04-22
+
+### Changed
+- README rewritten for end-users: removed local-development, scripts, and project-layout sections that were noise on the npmjs.com landing page; added explicit "What's supported" and "Known limitations" sections so users know up-front what works.
+- Contributor-facing material (local dev, scripts table, project layout, release process, regression-test workflow) moved to a new `CONTRIBUTING.md`.
+
 ## [1.0.5] — 2026-04-22
 
 ### Changed
@@ -61,7 +67,8 @@ Initial MVP release.
 - Cross-file type resolution is not yet supported; `extends` / `&` referencing external types emit a warning and are skipped.
 - Generic components, HOC-wrapped components, and `forwardRef` / `memo` unwrapping are out of scope for v1.0.
 
-[Unreleased]: https://github.com/matieydjato/react-intel/compare/v1.0.5...HEAD
+[Unreleased]: https://github.com/matieydjato/react-intel/compare/v1.0.6...HEAD
+[1.0.6]: https://github.com/matieydjato/react-intel/releases/tag/v1.0.6
 [1.0.5]: https://github.com/matieydjato/react-intel/releases/tag/v1.0.5
 [1.0.4]: https://github.com/matieydjato/react-intel/releases/tag/v1.0.4
 [1.0.3]: https://github.com/matieydjato/react-intel/releases/tag/v1.0.3

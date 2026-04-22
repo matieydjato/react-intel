@@ -60,10 +60,12 @@ jobs:
 
       - name: Install tarball in fresh project & run CLI
         run: |
+          TARBALL=$(ls "$GITHUB_WORKSPACE"/*.tgz | head -n 1)
+          echo "Using tarball: $TARBALL"
           mkdir /tmp/smoke && cd /tmp/smoke
           npm init -y > /dev/null
-          npm install "$GITHUB_WORKSPACE"/react-intel-*.tgz --no-audit --no-fund
+          npm install "$TARBALL" --no-audit --no-fund
           cp "$GITHUB_WORKSPACE"/tests/fixtures/Button.tsx .
-          npx react-intel Button.tsx -y
+          npx react-spec-gen Button.tsx -y
           test -f Button.test.tsx
           test -f Button.stories.tsx

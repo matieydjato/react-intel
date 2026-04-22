@@ -2,9 +2,7 @@
 
 > Generate Jest + RTL tests and Storybook CSF 3 stories from your React components.
 
-**Status:** v1.0.5 — MVP complete (all 5 phases of the [PRD](./PRD.md)), hardened through dogfooding.
-
-> The project codename is `react-intel`. The npm package is published as `react-spec-gen` (the original name was too similar to `react-intl` for the npm registry).
+**Status:** v1.0.5 — MVP complete, hardened through dogfooding on real-world codebases.
 
 ## Quickstart
 
@@ -22,42 +20,6 @@ Writes `Button.test.tsx` and `Button.stories.tsx` next to the source file.
 | `--ai` | Enrich inferred values + edge cases via an `AiProvider` (mock provider bundled) |
 
 The CLI prints a verification checklist after writing — review inferred prop values, assertion meaningfulness, and event-handler coverage before committing.
-
-## Local development
-
-```bash
-npm install
-npm run build
-node dist/bin/react-intel.js tests/fixtures/Button.tsx
-```
-
-### Scripts
-
-| Command | Description |
-|---|---|
-| `npm run build` | Build CLI + library to `dist/` |
-| `npm run dev` | Watch-mode build |
-| `npm test` | Run Vitest suite |
-| `npm run typecheck` | Type-check without emitting |
-
-## Project layout
-
-```
-src/
-  cli/           CLI entry & commands (Commander)
-  core/          Pure pipeline: analyzer → intelligence → generator
-    analyzer/    Babel parsing & prop extraction
-    intelligence/  Value inference & edge case detection
-    generator/   Test + story code generation
-    pipeline.ts  Orchestrator (also the programmatic API)
-    model.ts     Shared data contract
-    errors.ts    Typed errors
-  ai/            Pluggable AI enhancer (provider interface + mock)
-  utils/         Logger, file helpers
-bin/
-  react-intel.ts CLI shebang entry (built to dist/bin/react-intel.js)
-tests/           Vitest suites + .tsx fixtures
-```
 
 ## Programmatic use
 
@@ -81,8 +43,33 @@ The enhancer:
 - Validates suggestions against AST-extracted props (drops references to unknown props)
 - Is purely additive — never overwrites statically inferred values
 
-## Status & roadmap
+## What's supported
 
-- v1.0 — see [CHANGELOG.md](./CHANGELOG.md)
-- v1.1+ — see [BACKLOG.md](./BACKLOG.md)
+- Function components, arrow components, `React.FC<Props>`
+- Default and named exports
+- Props from inline types, `type` aliases, `interface` (incl. same-file `extends` / `&`)
+- `React.forwardRef` and `React.memo` wrappers (incl. nested combinations)
+- Realistic value inference for strings, numbers, booleans, functions, literal & non-literal unions, `ReactNode`
+- JSX root-element detection with implicit ARIA role mapping (`getByRole(...)` assertions)
+- Edge cases: boolean flags, optional props, union variants
+
+### Known limitations (v1.x)
+
+- Cross-file prop type imports — emits a warning and a minimal test
+- Discriminated unions (e.g. `{kind:"a"} | {kind:"b"}`) — emits a warning and a minimal test
+- Generic components — render-prop signatures may need manual review
+- Files with multiple exported components — picks the default export, falls back to the first
+
+## Roadmap
+
+- v1.0 changes — see [CHANGELOG.md](./CHANGELOG.md)
+- Planned work — see [BACKLOG.md](./BACKLOG.md)
+
+## Contributing
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for local development, project structure, and how to add tests.
+
+## License
+
+[MIT](./LICENSE)
 
