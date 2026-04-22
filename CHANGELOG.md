@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 See [BACKLOG.md](BACKLOG.md) for planned work.
 
+## [1.0.5] — 2026-04-22
+
+### Changed
+- **npm package renamed** from `react-intel` to `react-spec-gen`. The npm registry rejected the original name as too similar to the popular `react-intl` package. The CLI binary, the GitHub repository, and the project codename remain `react-intel`; only the published npm package and `npx` invocation change. Install via `npm install react-spec-gen` and invoke via `npx react-spec-gen` (the bin name was also updated for consistency).
+
 ## [1.0.4] — 2026-04-22
 
 ### Fixed
@@ -56,7 +61,8 @@ Initial MVP release.
 - Cross-file type resolution is not yet supported; `extends` / `&` referencing external types emit a warning and are skipped.
 - Generic components, HOC-wrapped components, and `forwardRef` / `memo` unwrapping are out of scope for v1.0.
 
-[Unreleased]: https://github.com/matieydjato/react-intel/compare/v1.0.4...HEAD
+[Unreleased]: https://github.com/matieydjato/react-intel/compare/v1.0.5...HEAD
+[1.0.5]: https://github.com/matieydjato/react-intel/releases/tag/v1.0.5
 [1.0.4]: https://github.com/matieydjato/react-intel/releases/tag/v1.0.4
 [1.0.3]: https://github.com/matieydjato/react-intel/releases/tag/v1.0.3
 [1.0.2]: https://github.com/matieydjato/react-intel/releases/tag/v1.0.2

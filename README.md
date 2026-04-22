@@ -1,13 +1,15 @@
-# react-intel
+# react-spec-gen
 
 > Generate Jest + RTL tests and Storybook CSF 3 stories from your React components.
 
-**Status:** v1.0.0 — MVP complete (all 5 phases of the [PRD](./PRD.md)).
+**Status:** v1.0.5 — MVP complete (all 5 phases of the [PRD](./PRD.md)), hardened through dogfooding.
+
+> The project codename is `react-intel`. The npm package is published as `react-spec-gen` (the original name was too similar to `react-intl` for the npm registry).
 
 ## Quickstart
 
 ```bash
-npx react-intel src/components/Button.tsx
+npx react-spec-gen src/components/Button.tsx
 ```
 
 Writes `Button.test.tsx` and `Button.stories.tsx` next to the source file.
@@ -60,7 +62,7 @@ tests/           Vitest suites + .tsx fixtures
 ## Programmatic use
 
 ```ts
-import { run, buildEnhancer, MockProvider } from "react-intel";
+import { run, buildEnhancer, MockProvider } from "react-spec-gen";
 
 const { model, outputs } = await run("./Button.tsx", {
   enhancer: buildEnhancer(new MockProvider()),
