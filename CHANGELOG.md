@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 See [BACKLOG.md](BACKLOG.md) for planned work.
 
+## [1.0.3] — 2026-04-22
+
+### Fixed
+- Non-literal union props (e.g. `string | number`, `string | MyType`) now produce a real sample value instead of `undefined`. Previously, a required prop typed `size: string | number` was emitted as `size: undefined`, which fails strict TypeScript checks. The analyzer now falls back to the kind of the first non-null/undefined union member.
+
 ## [1.0.2] — 2026-04-22
 
 ### Fixed
@@ -46,7 +51,8 @@ Initial MVP release.
 - Cross-file type resolution is not yet supported; `extends` / `&` referencing external types emit a warning and are skipped.
 - Generic components, HOC-wrapped components, and `forwardRef` / `memo` unwrapping are out of scope for v1.0.
 
-[Unreleased]: https://github.com/matieydjato/react-intel/compare/v1.0.2...HEAD
+[Unreleased]: https://github.com/matieydjato/react-intel/compare/v1.0.3...HEAD
+[1.0.3]: https://github.com/matieydjato/react-intel/releases/tag/v1.0.3
 [1.0.2]: https://github.com/matieydjato/react-intel/releases/tag/v1.0.2
 [1.0.1]: https://github.com/matieydjato/react-intel/releases/tag/v1.0.1
 [1.0.0]: https://github.com/matieydjato/react-intel/releases/tag/v1.0.0

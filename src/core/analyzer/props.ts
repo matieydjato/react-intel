@@ -201,6 +201,17 @@ function describeType(node: t.TSType | undefined): TypeDescription {
         .filter((v): v is string => v !== undefined);
       return { kind: "union", rawType: "union", unionMembers: members };
     }
+    // Mixed/non-literal union (e.g. `string | number`, `string | MyType`).
+    // Fall back to the first member's kind so we can produce a real sample
+    // value instead of `undefined` (which would fail strict typecheck on
+    // required props).
+    for (const member of node.types) {
+      if (t.isTSNullKeyword(member) || t.isTSUndefinedKeyword(member)) continue;
+      const inner = describeType(member);
+      if (inner.kind !== "unknown") {
+        return { ...inner, rawType: "union" };
+      }
+    }
     return { kind: "union", rawType: "union" };
   }
 

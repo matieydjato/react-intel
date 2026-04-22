@@ -59,3 +59,21 @@ describe("analyzer — Spinner.tsx (no props)", () => {
     expect(outputs.testSource).toContain("render(<Spinner");
   });
 });
+
+describe("analyzer — Sized.tsx (non-literal union props)", () => {
+  it("classifies `string | number` as the first member's kind so a real value is generated", async () => {
+    const { model } = await run(fixture("Sized.tsx"));
+    const byName = Object.fromEntries(model.props.map((p) => [p.name, p]));
+    expect(byName.size?.kind).toBe("string");
+    expect(byName.size?.required).toBe(true);
+  });
+
+  it("never emits `undefined` for a required non-literal union prop", async () => {
+    const { outputs, model } = await run(fixture("Sized.tsx"));
+    const sizeValue = model.inferredValues.size?.expression;
+    expect(sizeValue).toBeDefined();
+    expect(sizeValue).not.toBe("undefined");
+    // The generated test must not contain `size: undefined,` for the required prop.
+    expect(outputs.testSource).not.toMatch(/size:\s*undefined/);
+  });
+});
