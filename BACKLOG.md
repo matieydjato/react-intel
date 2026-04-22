@@ -1,10 +1,10 @@
 # Backlog
 
-Tracking work beyond v1.0 MVP. Items grouped by release; ordered roughly by priority within each group.
+Tracking work beyond the 0.1 initial release. Items grouped by release; ordered roughly by priority within each group.
 
 ---
 
-## v1.1 — Team & DX
+## 0.2 — Team & DX
 
 ### Phase 4b — Real AI providers
 Architecture is already in place: `AiProvider` interface in [src/ai/types.ts](src/ai/types.ts), enhancer wrapper in [src/ai/enhancer.ts](src/ai/enhancer.ts), additive validation in [src/ai/validate.ts](src/ai/validate.ts). Mock provider in [src/ai/providers/mock.ts](src/ai/providers/mock.ts) is the reference implementation.
@@ -44,7 +44,7 @@ Architecture is already in place: `AiProvider` interface in [src/ai/types.ts](sr
 
 ---
 
-## v2.0 — Platform Expansion
+## 1.0 — Platform Expansion
 
 - [ ] VS Code extension (right-click → "Generate tests with react-spec-gen")
 - [ ] Accessibility (a11y) suggestions in checklist (axe-core static rules on the JSX root)
@@ -65,10 +65,10 @@ Architecture is already in place: `AiProvider` interface in [src/ai/types.ts](sr
 
 ---
 
-## Release prep (when ready to publish v1.0)
+## Release prep (initial 0.1.0)
 
-- [x] Verify `react-intel` name availability on npm (`npm view react-intel`); fall back to `@<scope>/react-intel` — *renamed to `react-spec-gen` in 1.0.5 due to similarity with `react-intl`*
-- [x] Add `LICENSE` (MIT?)
+- [x] Verify name availability on npm — *renamed to `react-spec-gen` due to similarity with `react-intl`*
+- [x] Add `LICENSE` (MIT)
 - [x] Add `CHANGELOG.md`
-- [x] Tag `v1.0.0` and push
+- [x] Tag `v0.1.0` and push
 - [x] `npm publish --access public`
