@@ -5,7 +5,7 @@ export function buildProgram(): Command {
   const program = new Command();
 
   program
-    .name("react-intel")
+    .name("react-spec-gen")
     .description("Generate tests and Storybook stories from React components.")
     .version("0.1.0")
     .argument("<file>", "Path to a .tsx or .jsx component file")
