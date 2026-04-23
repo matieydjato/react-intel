@@ -1,0 +1,72 @@
+name: Bug report
+description: Report a problem with react-spec-gen
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug. Please fill in the sections below so we can reproduce and fix it quickly.
+
+  - type: input
+    id: version
+    attributes:
+      label: react-spec-gen version
+      description: Output of `npx react-spec-gen --version`
+      placeholder: "0.1.2"
+    validations:
+      required: true
+
+  - type: input
+    id: node
+    attributes:
+      label: Node version
+      description: Output of `node --version`
+      placeholder: "v20.11.0"
+    validations:
+      required: true
+
+  - type: input
+    id: os
+    attributes:
+      label: Operating system
+      placeholder: "Windows 11 / macOS 14 / Ubuntu 22.04"
+    validations:
+      required: true
+
+  - type: textarea
+    id: component
+    attributes:
+      label: Minimal component that reproduces the issue
+      description: The smallest `.tsx` file that triggers the bug.
+      render: tsx
+    validations:
+      required: true
+
+  - type: textarea
+    id: command
+    attributes:
+      label: Command you ran
+      placeholder: "npx react-spec-gen src/Foo.tsx"
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: Include any console output, generated file content, or error messages.
+    validations:
+      required: true
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Additional context
+      description: Anything else that might help (screenshots, related issues, etc.).
