@@ -48,7 +48,7 @@
   },
   "homepage": "https://github.com/matieydjato/react-intel#readme",
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "dependencies": {
     "@babel/parser": "^7.24.0",
@@ -61,7 +61,7 @@
   },
   "devDependencies": {
     "@types/babel__traverse": "^7.20.5",
-    "@types/node": "^20.11.0",
+    "@types/node": "^22.0.0",
     "@types/prompts": "^2.4.9",
     "tsup": "^8.0.2",
     "typescript": "^5.4.0",
