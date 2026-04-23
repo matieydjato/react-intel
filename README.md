@@ -5,6 +5,8 @@
 [![npm version](https://img.shields.io/npm/v/react-spec-gen)](https://www.npmjs.com/package/react-spec-gen)
 [![license](https://img.shields.io/npm/l/react-spec-gen)](./LICENSE)
 [![node](https://img.shields.io/node/v/react-spec-gen)](https://nodejs.org)
+[![CI](https://github.com/matieydjato/react-intel/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/matieydjato/react-intel/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/matieydjato/react-intel/actions/workflows/github-code-scanning/codeql/badge.svg?branch=main)](https://github.com/matieydjato/react-intel/security/code-scanning)
 
 Run it on a `.tsx` component — get a Vitest test file and a Storybook story file written next to the source.
 
