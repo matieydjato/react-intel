@@ -1,6 +1,8 @@
 # react-spec-gen
 
 > Generate Vitest + RTL tests and Storybook CSF 3 stories from your React components.
+>
+> *(npm package name: `react-spec-gen` — GitHub repository: `react-intel`. Both refer to the same project.)*
 
 [![npm version](https://img.shields.io/npm/v/react-spec-gen)](https://www.npmjs.com/package/react-spec-gen)
 [![license](https://img.shields.io/npm/l/react-spec-gen)](./LICENSE)

@@ -38,7 +38,8 @@
   border-color: rgba(129, 140, 248, 0.18);
 }
 
-.featureCard:hover {
+.featureCard:hover,
+.featureCard:focus-within {
   transform: translateY(-3px);
   border-color: var(--ifm-color-primary);
   box-shadow: 0 12px 32px rgba(99, 102, 241, 0.18);
@@ -58,6 +59,6 @@
 
 .featureDescription {
   margin: 0;
-  opacity: 0.85;
+  opacity: 0.92;
   line-height: 1.6;
 }
