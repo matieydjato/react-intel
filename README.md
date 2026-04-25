@@ -1,6 +1,8 @@
 # react-spec-gen
 
 > Generate Vitest + RTL tests and Storybook CSF 3 stories from your React components.
+>
+> *(npm package name: `react-spec-gen` — GitHub repository: `react-intel`. Both refer to the same project.)*
 
 [![npm version](https://img.shields.io/npm/v/react-spec-gen)](https://www.npmjs.com/package/react-spec-gen)
 [![license](https://img.shields.io/npm/l/react-spec-gen)](./LICENSE)
@@ -149,7 +151,7 @@ The enhancer:
 - JSX root-element detection with implicit ARIA role mapping (`getByRole(...)` assertions)
 - Edge cases: boolean flags, optional props, union variants
 
-### Known limitations (v1.x)
+### Known limitations (v0.1.x)
 
 - Cross-file prop type imports — emits a warning and a minimal test
 - Discriminated unions (e.g. `{kind:"a"} | {kind:"b"}`) — emits a warning and a minimal test
