@@ -149,7 +149,7 @@ The enhancer:
 - JSX root-element detection with implicit ARIA role mapping (`getByRole(...)` assertions)
 - Edge cases: boolean flags, optional props, union variants
 
-### Known limitations (v1.x)
+### Known limitations (v0.1.x)
 
 - Cross-file prop type imports — emits a warning and a minimal test
 - Discriminated unions (e.g. `{kind:"a"} | {kind:"b"}`) — emits a warning and a minimal test
