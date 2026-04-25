@@ -16,7 +16,7 @@ const config: Config = {
   title: 'react-spec-gen',
   tagline:
     'Generate Vitest + RTL tests and Storybook CSF 3 stories from your React components',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/favicon.svg',
 
   customFields: {
     packageVersion: rootPkg.version,
