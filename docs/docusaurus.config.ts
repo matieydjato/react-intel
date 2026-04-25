@@ -1,12 +1,26 @@
 import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
+import {readFileSync} from 'node:fs';
+import {fileURLToPath} from 'node:url';
+import {dirname, resolve} from 'node:path';
+
+const rootPkg = JSON.parse(
+  readFileSync(
+    resolve(dirname(fileURLToPath(import.meta.url)), '..', 'package.json'),
+    'utf8',
+  ),
+) as {version: string};
 
 const config: Config = {
   title: 'react-spec-gen',
   tagline:
     'Generate Vitest + RTL tests and Storybook CSF 3 stories from your React components',
   favicon: 'img/favicon.ico',
+
+  customFields: {
+    packageVersion: rootPkg.version,
+  },
 
   future: {
     v4: true,

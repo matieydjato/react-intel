@@ -102,12 +102,12 @@ unsupported component shape, etc.). Catch it to surface a clean error
 message:
 
 ```ts
-import { run } from "react-spec-gen";
+import { run, ReactIntelError } from "react-spec-gen";
 
 try {
   const { outputs } = await run("./src/Button.tsx");
 } catch (err) {
-  if (err && typeof err === "object" && "name" in err && err.name === "ReactIntelError") {
+  if (err instanceof ReactIntelError) {
     console.error(err.message);
   } else {
     throw err;

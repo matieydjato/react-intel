@@ -53,7 +53,9 @@ Before committing, verify:
   □ Warnings above are addressed or acknowledged
 ```
 
-The last item only appears when warnings were emitted. **Treat the output
+The event-handlers line is only printed when the component exposes
+handler-like props (e.g. `onClick`, `onChange`), and the warnings line
+only appears when warnings were emitted. **Treat the output
 like code from a teammate** — review and tweak before committing.
 
 ## Warnings

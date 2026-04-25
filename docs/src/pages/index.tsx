@@ -87,10 +87,13 @@ export const Disabled: Story = {
 
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
+  const version = (siteConfig.customFields?.packageVersion as string) ?? '';
   return (
     <header className={clsx(styles.heroBanner)}>
       <div className={clsx('container', styles.heroInner)}>
-        <span className={styles.eyebrow}>v0.1.2 · MIT · Node ≥ 20</span>
+        <span className={styles.eyebrow}>
+          {version ? `v${version} · ` : ''}MIT · Node ≥ 20
+        </span>
         <Heading as="h1" className={styles.heroTitle}>
           {siteConfig.title}
         </Heading>

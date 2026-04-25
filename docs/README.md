@@ -35,7 +35,7 @@ npm run serve
 
 The site is deployed automatically by the
 [`deploy-docs.yml`](../.github/workflows/deploy-docs.yml) workflow on every
-push to `main` or `develop` that touches `docs/**`.
+push to `main` that touches `docs/**`.
 
 You generally do **not** need to deploy manually — let CI do it.
 
