@@ -1,5 +1,5 @@
-import type { AiSuggestion } from "./types.js";
 import type { ComponentModel, EdgeCase, InferredValue } from "../core/model.js";
+import type { AiSuggestion } from "./types.js";
 
 /**
  * Validate a raw AiSuggestion against the analyzer-extracted ComponentModel.

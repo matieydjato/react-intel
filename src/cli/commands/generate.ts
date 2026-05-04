@@ -1,9 +1,9 @@
 import ora from "ora";
-import { run } from "../../core/pipeline.js";
-import { ReactIntelError } from "../../core/errors.js";
 import { buildEnhancer, MockProvider } from "../../ai/index.js";
-import type { Enhancer } from "../../core/pipeline.js";
+import { ReactIntelError } from "../../core/errors.js";
 import type { ComponentModel } from "../../core/model.js";
+import type { Enhancer } from "../../core/pipeline.js";
+import { run } from "../../core/pipeline.js";
 import { fileExists, writeFileSafe } from "../../utils/file.js";
 import { logger } from "../../utils/logger.js";
 import { confirmOverwrite } from "../prompts.js";

@@ -40,15 +40,13 @@ type Story = StoryObj<typeof ${model.name}>;
 export const Default: Story = {
   args: ${defaultArgs},
 };
-${variantBlocks ? "\n" + variantBlocks + "\n" : ""}`;
+${variantBlocks ? `\n${variantBlocks}\n` : ""}`;
 }
 
 function renderArgs(inferred: Record<string, InferredValue>): string {
   const entries = Object.entries(inferred);
   if (entries.length === 0) return "{}";
-  const lines = entries
-    .map(([k, v]) => `    ${k}: ${storyExpression(v.expression)},`)
-    .join("\n");
+  const lines = entries.map(([k, v]) => `    ${k}: ${storyExpression(v.expression)},`).join("\n");
   return `{\n${lines}\n  }`;
 }
 

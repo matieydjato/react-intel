@@ -1,5 +1,5 @@
-import { describe, it, expect } from "vitest";
 import { resolve } from "node:path";
+import { describe, expect, it } from "vitest";
 import { run } from "../../src/core/pipeline.js";
 
 const FIXTURE = resolve(__dirname, "../fixtures/Button.tsx");

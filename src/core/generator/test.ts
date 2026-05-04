@@ -31,7 +31,7 @@ ${hasProps ? `  const baseProps = ${baseProps};\n\n` : ""}  it("renders with def
     ${baseRender}
     ${rootAssertion}
   });
-${edgeCaseBlocks ? "\n" + edgeCaseBlocks + "\n" : ""}});
+${edgeCaseBlocks ? `\n${edgeCaseBlocks}\n` : ""}});
 `;
 }
 
