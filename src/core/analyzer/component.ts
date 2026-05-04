@@ -4,7 +4,9 @@ import * as t from "@babel/types";
 import { AnalysisError } from "../errors.js";
 import type { ParsedSource } from "./parser.js";
 
-// @babel/traverse default export interop under ESM.
+// @babel/traverse ships as CJS but exposes its function as `module.exports.default`
+// when consumed from ESM, so we unwrap the default export at runtime. The
+// `?? _traverse` fallback covers older bundlers that already give us the function.
 const traverse = (_traverse as unknown as { default: typeof _traverse }).default ?? _traverse;
 
 export interface ComponentInfo {

@@ -55,6 +55,7 @@ Expected output:
 |---|---|
 | `-y`, `--yes` | Skip overwrite prompts |
 | `--ai` | Enhance inferred values and edge cases using an AI provider (optional) |
+| `--verbose` | Print debug traces (also enabled by `REACT_SPEC_GEN_DEBUG=1`) |
 
 The CLI prints a verification checklist after writing — review inferred prop values, assertion meaningfulness, and event-handler coverage before committing.
 

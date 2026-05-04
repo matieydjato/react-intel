@@ -1,5 +1,6 @@
 import { Command } from "commander";
 import pkg from "../../package.json" with { type: "json" };
+import { logger } from "../utils/logger.js";
 import { runGenerate } from "./commands/generate.js";
 
 export function buildProgram(): Command {
@@ -12,7 +13,9 @@ export function buildProgram(): Command {
     .argument("<file>", "Path to a .tsx or .jsx component file")
     .option("--ai", "Enable AI-powered enhancement (mock provider for now)", false)
     .option("-y, --yes", "Overwrite existing files without prompting", false)
-    .action(async (file: string, opts: { ai: boolean; yes: boolean }) => {
+    .option("--verbose", "Print debug traces (also enabled by REACT_SPEC_GEN_DEBUG=1)", false)
+    .action(async (file: string, opts: { ai: boolean; yes: boolean; verbose: boolean }) => {
+      logger.setVerbose(opts.verbose);
       const code = await runGenerate(file, opts);
       process.exit(code);
     });

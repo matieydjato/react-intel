@@ -15,10 +15,14 @@ export interface GenerateOptions {
 
 export async function runGenerate(file: string, opts: GenerateOptions): Promise<number> {
   try {
+    logger.debug(`runGenerate: file=${file}, ai=${opts.ai}, yes=${opts.yes}`);
     const enhancer = opts.ai ? withSpinner(buildEnhancer(new MockProvider())) : undefined;
 
     const result = await run(file, { enhancer });
     const { testFilePath, testSource, storyFilePath, storySource } = result.outputs;
+    logger.debug(
+      `pipeline result: component=${result.model.name}, props=${result.model.props.length}, warnings=${result.model.warnings.length}`,
+    );
 
     for (const w of result.model.warnings) logger.warn(w);
 
