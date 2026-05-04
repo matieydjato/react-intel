@@ -4,6 +4,9 @@ import type { PropDescriptor, PropKind } from "../model.js";
 import type { ComponentInfo } from "./component.js";
 import type { ParsedSource } from "./parser.js";
 
+// @babel/traverse ships as CJS but exposes its function as `module.exports.default`
+// when consumed from ESM, so we unwrap the default export at runtime. The
+// `?? _traverse` fallback covers older bundlers that already give us the function.
 const traverse = (_traverse as unknown as { default: typeof _traverse }).default ?? _traverse;
 
 const EVENT_HANDLER_RE = /^on[A-Z]/;
