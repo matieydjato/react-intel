@@ -3,7 +3,10 @@
  */
 
 export class ReactIntelError extends Error {
-  constructor(message: string, public readonly hint?: string) {
+  constructor(
+    message: string,
+    public readonly hint?: string,
+  ) {
     super(message);
     this.name = "ReactIntelError";
   }

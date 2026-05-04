@@ -27,8 +27,11 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "typecheck": "tsc --noEmit",
+    "lint": "biome check",
+    "lint:fix": "biome check --write",
+    "format": "biome format --write",
     "start": "node dist/bin/react-intel.js",
-    "prepublishOnly": "npm run typecheck && npm test && npm run build"
+    "prepublishOnly": "npm run lint && npm run typecheck && npm test && npm run build"
   },
   "keywords": [
     "react",
@@ -61,6 +64,7 @@
     "prompts": "^2.4.2"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.4.14",
     "@types/babel__traverse": "^7.20.5",
     "@types/node": "^25.6.0",
     "@types/prompts": "^2.4.9",

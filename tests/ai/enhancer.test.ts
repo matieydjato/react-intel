@@ -1,9 +1,8 @@
-import { describe, it, expect } from "vitest";
 import { resolve } from "node:path";
-import { run } from "../../src/core/pipeline.js";
-import { buildEnhancer, MockProvider } from "../../src/ai/index.js";
+import { describe, expect, it } from "vitest";
 import type { AiProvider } from "../../src/ai/index.js";
-import type { ComponentModel } from "../../src/core/model.js";
+import { buildEnhancer, MockProvider } from "../../src/ai/index.js";
+import { run } from "../../src/core/pipeline.js";
 
 const fixture = (name: string) => resolve(__dirname, `../fixtures/${name}`);
 
@@ -93,6 +92,7 @@ describe("ai/enhancer — orchestration safety", () => {
   it("ignores a non-object response without throwing", async () => {
     const garbage: AiProvider = {
       name: "garbage",
+      // biome-ignore lint/suspicious/noExplicitAny: deliberately returning a non-object to test the guard
       async suggest(): Promise<any> {
         return "not an object";
       },

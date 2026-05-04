@@ -1,5 +1,5 @@
-import { describe, it, expect } from "vitest";
 import { resolve } from "node:path";
+import { describe, expect, it } from "vitest";
 import { run } from "../../src/core/pipeline.js";
 
 const fixture = (name: string) => resolve(__dirname, `../fixtures/${name}`);
@@ -25,6 +25,6 @@ describe("analyzer — HOC unwrapping", () => {
   it("renders a meaningful test for a forwardRef component", async () => {
     const { outputs } = await run(fixture("IconButton.tsx"));
     expect(outputs.testSource).toContain("import { IconButton }");
-    expect(outputs.testSource).toContain("getByRole(\"button\")");
+    expect(outputs.testSource).toContain('getByRole("button")');
   });
 });

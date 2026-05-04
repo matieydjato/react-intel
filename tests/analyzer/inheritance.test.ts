@@ -1,5 +1,5 @@
-import { describe, it, expect } from "vitest";
 import { resolve } from "node:path";
+import { describe, expect, it } from "vitest";
 import { run } from "../../src/core/pipeline.js";
 
 const fixture = (name: string) => resolve(__dirname, `../fixtures/${name}`);
@@ -42,8 +42,8 @@ describe("analyzer — external/unsupported extends", () => {
     // The local-only prop must still be picked up.
     expect(model.props.some((p) => p.name === "label")).toBe(true);
     // And we should warn that React.AnchorHTMLAttributes can't be resolved.
-    expect(model.warnings.some((w) => /Cross-file type resolution|AnchorHTMLAttributes/.test(w))).toBe(
-      true,
-    );
+    expect(
+      model.warnings.some((w) => /Cross-file type resolution|AnchorHTMLAttributes/.test(w)),
+    ).toBe(true);
   });
 });

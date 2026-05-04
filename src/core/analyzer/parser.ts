@@ -1,6 +1,6 @@
-import { parse, type ParserOptions } from "@babel/parser";
-import type { File } from "@babel/types";
 import { readFile } from "node:fs/promises";
+import { type ParserOptions, parse } from "@babel/parser";
+import type { File } from "@babel/types";
 import { ParseError } from "../errors.js";
 
 const DEFAULT_PLUGINS: ParserOptions["plugins"] = [
@@ -21,7 +21,7 @@ export async function parseFile(filePath: string): Promise<ParsedSource> {
   let source: string;
   try {
     source = await readFile(filePath, "utf8");
-  } catch (err) {
+  } catch (_err) {
     throw new ParseError(
       `Could not read file: ${filePath}`,
       "Verify the path exists and is readable.",

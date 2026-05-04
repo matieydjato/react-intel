@@ -1,12 +1,12 @@
 import { basename, dirname, extname, resolve } from "node:path";
-import { parseFile } from "./analyzer/parser.js";
 import { findComponent } from "./analyzer/component.js";
-import { extractProps } from "./analyzer/props.js";
 import { findRootJsx } from "./analyzer/jsx.js";
-import { inferAll } from "./intelligence/prop-inference.js";
-import { detectEdgeCases } from "./intelligence/edge-cases.js";
-import { generateTest } from "./generator/test.js";
+import { parseFile } from "./analyzer/parser.js";
+import { extractProps } from "./analyzer/props.js";
 import { generateStory } from "./generator/story.js";
+import { generateTest } from "./generator/test.js";
+import { detectEdgeCases } from "./intelligence/edge-cases.js";
+import { inferAll } from "./intelligence/prop-inference.js";
 import type { ComponentModel } from "./model.js";
 
 /** Optional async enhancer (e.g. AI). Receives the model, returns an enriched one. */

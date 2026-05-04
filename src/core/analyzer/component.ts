@@ -1,6 +1,6 @@
+import { basename, extname } from "node:path";
 import _traverse from "@babel/traverse";
 import * as t from "@babel/types";
-import { basename, extname } from "node:path";
 import { AnalysisError } from "../errors.js";
 import type { ParsedSource } from "./parser.js";
 
@@ -51,7 +51,13 @@ export function findComponent(parsed: ParsedSource): ComponentInfo {
     ExportDefaultDeclaration(path) {
       const decl = path.node.declaration;
       // `export default function Foo() {}` / `export default () => ...`
-      const direct = nodeToComponent(decl, inferNameFromFile(parsed.filePath), true, undefined, declarations);
+      const direct = nodeToComponent(
+        decl,
+        inferNameFromFile(parsed.filePath),
+        true,
+        undefined,
+        declarations,
+      );
       if (direct) {
         defaultCandidate = direct;
         return;
@@ -66,7 +72,13 @@ export function findComponent(parsed: ParsedSource): ComponentInfo {
       }
       // `export default memo(Foo)` / `export default forwardRef(...)`
       if (t.isCallExpression(decl)) {
-        const info = nodeToComponent(decl, inferNameFromFile(parsed.filePath), true, undefined, declarations);
+        const info = nodeToComponent(
+          decl,
+          inferNameFromFile(parsed.filePath),
+          true,
+          undefined,
+          declarations,
+        );
         if (info) defaultCandidate = info;
       }
     },
@@ -83,7 +95,13 @@ export function findComponent(parsed: ParsedSource): ComponentInfo {
       if (t.isVariableDeclaration(decl)) {
         for (const declarator of decl.declarations) {
           if (!t.isIdentifier(declarator.id) || !declarator.init) continue;
-          const info = nodeToComponent(declarator.init, declarator.id.name, false, declarator.id, declarations);
+          const info = nodeToComponent(
+            declarator.init,
+            declarator.id.name,
+            false,
+            declarator.id,
+            declarations,
+          );
           if (info && !namedCandidate) namedCandidate = info;
         }
       }
@@ -137,7 +155,9 @@ function nodeToComponent(
       isDefaultExport,
       propsTypeName:
         extractPropsTypeFromParam(node.params[0]) ??
-        (t.isTSTypeAnnotation(idAnnotation) ? extractPropsTypeFromAnnotation(idAnnotation) : undefined),
+        (t.isTSTypeAnnotation(idAnnotation)
+          ? extractPropsTypeFromAnnotation(idAnnotation)
+          : undefined),
       implementation: node,
     };
   }

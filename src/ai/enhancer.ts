@@ -1,5 +1,5 @@
-import type { Enhancer } from "../core/pipeline.js";
 import type { ComponentModel } from "../core/model.js";
+import type { Enhancer } from "../core/pipeline.js";
 import type { AiProvider } from "./types.js";
 import { applySuggestion, validateSuggestion } from "./validate.js";
 

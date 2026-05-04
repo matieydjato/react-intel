@@ -1,8 +1,8 @@
 import _traverse from "@babel/traverse";
 import * as t from "@babel/types";
 import type { PropDescriptor, PropKind } from "../model.js";
-import type { ParsedSource } from "./parser.js";
 import type { ComponentInfo } from "./component.js";
+import type { ParsedSource } from "./parser.js";
 
 const traverse = (_traverse as unknown as { default: typeof _traverse }).default ?? _traverse;
 
@@ -147,7 +147,11 @@ function collectMembersFromType(
 // ---------------------------------------------------------------------------
 
 type FoundType =
-  | { kind: "interface"; body: t.TSInterfaceBody; extends?: t.TSExpressionWithTypeArguments[] | null }
+  | {
+      kind: "interface";
+      body: t.TSInterfaceBody;
+      extends?: t.TSExpressionWithTypeArguments[] | null;
+    }
   | { kind: "alias"; value: t.TSType };
 
 function findTypeDeclaration(parsed: ParsedSource, name: string): FoundType | undefined {

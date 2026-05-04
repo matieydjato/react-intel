@@ -31,7 +31,6 @@ export function inferValue(prop: PropDescriptor): InferredValue {
       return { expression: "[]", label: "empty-array" };
     case "object":
       return { expression: "{}", label: "empty-object" };
-    case "unknown":
     default:
       return { expression: "undefined", label: "unknown" };
   }

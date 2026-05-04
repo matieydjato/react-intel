@@ -1,6 +1,6 @@
 import { Command } from "commander";
-import { runGenerate } from "./commands/generate.js";
 import pkg from "../../package.json" with { type: "json" };
+import { runGenerate } from "./commands/generate.js";
 
 export function buildProgram(): Command {
   const program = new Command();
