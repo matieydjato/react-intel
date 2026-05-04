@@ -16,8 +16,7 @@
     "outDir": "dist",
     "rootDir": ".",
     "isolatedModules": true,
-    "verbatimModuleSyntax": true,
-    "ignoreDeprecations": "6.0"
+    "verbatimModuleSyntax": true
   },
   "include": ["src/**/*", "bin/**/*", "tests/**/*"],
   "exclude": ["dist", "node_modules", "tests/fixtures/**"]
