@@ -13,7 +13,7 @@ export default defineConfig({
         "src/**/*.d.ts",
         "src/**/index.ts",
         "src/**/types.ts",
-        "src/cli/**",
+        "src/cli/prompts.ts",
         "src/utils/**",
         "src/core/errors.ts",
         "src/core/model.ts",
