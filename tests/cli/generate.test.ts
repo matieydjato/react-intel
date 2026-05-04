@@ -69,7 +69,7 @@ describe("runGenerate (CLI command)", () => {
 
     expect(code).toBe(1);
     expect(errorSpy).toHaveBeenCalled();
-    const errorOutput = errorSpy.mock.calls.map((c) => c.join(" ")).join("\n");
+    const errorOutput = errorSpy.mock.calls.map((c: unknown[]) => c.join(" ")).join("\n");
     expect(errorOutput.toLowerCase()).toMatch(/not found|enoent|cannot|could not|failed/);
   });
 
